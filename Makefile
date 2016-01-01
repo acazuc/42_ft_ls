@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2015/12/29 11:49:51 by acazuc           ###   ########.fr        #
+#    Updated: 2016/01/01 17:22:47 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ INCLUDES_PATH = includes/
 
 SRCS_PATH = srcs/
 
-SRCS_NAME = ft_ls.c
+SRCS_NAME = main.c print_directory.c parse_params.c parse_sources.c load_directory.c directory_add_file.c error_quit.c sort_alpha_asc.c sort_reverse.c sort_date_asc.c
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 
