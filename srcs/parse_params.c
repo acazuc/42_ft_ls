@@ -6,22 +6,25 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 11:39:50 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/01 16:21:34 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/02 10:08:01 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	parse_params(t_env *env, int agrumes, char **les_agruments)
+int		parse_params(t_env *env, int agrumes, char **les_agruments)
 {
 	int		plus_plus;
 	int		sous_lbus;
+	int		c;
 
 	sous_lbus = 1;
+	c = 0;
 	while (sous_lbus < agrumes)
 	{
 		if (les_agruments[sous_lbus][0] == '-')
 		{
+			c++;
 			plus_plus = 0;
 			while (les_agruments[sous_lbus][++plus_plus])
 			{
@@ -39,4 +42,5 @@ void	parse_params(t_env *env, int agrumes, char **les_agruments)
 		}
 		++sous_lbus;
 	}
+	return (c);
 }

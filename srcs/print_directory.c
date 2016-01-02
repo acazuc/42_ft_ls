@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 11:06:21 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/01 17:36:36 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/02 10:15:44 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,31 @@ static void		print_file(t_file *file, t_directory *dir)
 	ft_putchar('\n');
 }
 
+void			print_subdirs(t_env *env, t_directory *dir)
+{
+	t_directory_list	*lst;
+
+	lst = dir->directories;
+	while (lst)
+	{
+		print_directory(env, lst->path, 1);
+		lst = lst->next;
+	}
+}
+
 void			print_directory(t_env *env, char *path, int is_recur)
 {
-	t_directory		*dir;
-	t_file_list		*lst;
+	t_directory			*dir;
+	t_file_list			*lst;
 
 	if ((dir = load_directory(env, path)))
 	{
+		if (is_recur)
+		{
+			ft_putchar('\n');
+			ft_putstr(path);
+			ft_putstr(":\n");
+		}
 		if (env->l)
 		{
 			ft_putstr("total ");
@@ -61,6 +79,9 @@ void			print_directory(t_env *env, char *path, int is_recur)
 			}
 			lst = lst->next;
 		}
+		if (!(env->l))
+			ft_putchar('\n');
+		print_subdirs(env, dir);
 	}
 	(void)is_recur;
 }

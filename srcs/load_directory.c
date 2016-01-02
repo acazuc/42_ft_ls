@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 14:32:35 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/01 17:29:16 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/02 10:07:03 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	directory_init(t_directory *dir, char *path)
 	dir->user_len = 0;
 	dir->group_len = 0;
 	dir->size_len = 0;
+	dir->directories = NULL;
 }
 
 static void	do_sorts(t_env *env, t_directory *directory)
@@ -47,7 +48,8 @@ t_directory	*load_directory(t_env *env, char *path)
 		while ((ep = readdir(dir)))
 		{
 			if (env->a || ep->d_name[0] != '.')
-				directory_add_file(env, directory, ep);
+				if (directory_add_file(env, directory, ep) && env->R)
+					add_directory(directory, ep);
 		}
 		closedir(dir);
 		do_sorts(env, directory);

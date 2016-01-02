@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 14:39:31 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/01 18:11:54 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/02 10:08:36 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ static char		*get_file_perms(struct stat *info, int is_link)
 	return (perms);
 }
 
-static void		load_file_symb(t_file *file, struct stat info, t_directory *dir)
+static void		load_file_symb(t_file *file, struct stat info, t_directory *dir
+		, char *rpath)
 {
 	struct passwd	*pw;
 	struct group	*gr;
@@ -44,8 +45,8 @@ static void		load_file_symb(t_file *file, struct stat info, t_directory *dir)
 
 	if (!(linkname = malloc(info.st_size + 1)))
 		error_quit("Failed to malloc linkname");
-	r = readlink(file->name, linkname, info.st_size + 1);
-	if (r < 0 || r > info.st_size)
+	r = readlink(rpath, linkname, info.st_size + 1);
+	if (r < 0)
 		error_quit("Bad link id, did it changed ?");
 	linkname[info.st_size] = '\0';
 	file->name = ft_strjoin(file->name, " -> ");
@@ -62,7 +63,7 @@ static void		load_file_symb(t_file *file, struct stat info, t_directory *dir)
 	dir->total_links += info.st_blocks;
 }
 
-static void		load_file(t_env *env, t_file *file, struct dirent *ep
+static int		load_file(t_env *env, t_file *file, struct dirent *ep
 		, t_directory *dir)
 {
 	struct stat		linfo;
@@ -72,14 +73,15 @@ static void		load_file(t_env *env, t_file *file, struct dirent *ep
 
 
 	file->name = ep->d_name;
+	stat(ft_strjoin(ft_strjoin(dir->path, "/"), ep->d_name), &info);
 	if (env->l)
 	{
-		stat(ep->d_name, &info);
-		lstat(ep->d_name, &linfo);
+		lstat(ft_strjoin(ft_strjoin(dir->path, "/"), ep->d_name), &linfo);
 		if (info.st_ino != linfo.st_ino)
-			load_file_symb(file, linfo, dir);
+			load_file_symb(file, linfo, dir
+					, ft_strjoin(ft_strjoin(dir->path, "/"), ep->d_name));
 		if (info.st_ino != linfo.st_ino)
-			return ;
+			return (0);
 		pw = getpwuid(info.st_uid);
 		gr = getgrgid(info.st_gid);
 		file->perms = get_file_perms(&info, 0);
@@ -91,6 +93,7 @@ static void		load_file(t_env *env, t_file *file, struct dirent *ep
 		file->timestamp = info.st_mtime;
 		dir->total_links += info.st_blocks;
 	}
+	return (S_ISDIR(info.st_mode));
 }
 
 static void		check_lengths(t_env *env, t_directory *dir, t_file *file)
@@ -110,20 +113,22 @@ static void		check_lengths(t_env *env, t_directory *dir, t_file *file)
 	}
 }
 
-void			directory_add_file(t_env *env, t_directory *dir
+int				directory_add_file(t_env *env, t_directory *dir
 		, struct dirent *ep)
 {
 	t_file_list		*list;
 	t_file_list		*lst;
 	t_file			*file;
+	int				is_dir;
 
+	is_dir = 0;
 	if (!(file = malloc(sizeof(*file))))
 		error_quit("Failed to malloc file");
 	if (!(list = malloc(sizeof(*list))))
 		error_quit("Failed to malloc list");
 	list->file = file;
 	list->next = NULL;
-	load_file(env, file, ep, dir);
+	is_dir = load_file(env, file, ep, dir);
 	check_lengths(env, dir, file);
 	if (!(dir->files))
 		dir->files = list;
@@ -134,4 +139,5 @@ void			directory_add_file(t_env *env, t_directory *dir
 			lst = lst->next;
 		lst->next = list;
 	}
+	return (is_dir);
 }
