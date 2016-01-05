@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 14:32:35 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/02 10:07:03 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/05 15:59:17 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	directory_init(t_directory *dir, char *path)
 	dir->directories = NULL;
 }
 
-static void	do_sorts(t_env *env, t_directory *directory)
+/*static void	do_sorts(t_env *env, t_directory *directory)
 {
 	if (env->t)
 		sort_date_asc(directory);
@@ -32,7 +32,7 @@ static void	do_sorts(t_env *env, t_directory *directory)
 		sort_alpha_asc(directory);
 	if (env->r)
 		sort_reverse(directory);
-}
+}*/
 
 t_directory	*load_directory(t_env *env, char *path)
 {
@@ -52,7 +52,7 @@ t_directory	*load_directory(t_env *env, char *path)
 					add_directory(directory, ep);
 		}
 		closedir(dir);
-		do_sorts(env, directory);
+		//do_sorts(env, directory);
 	}
 	else
 	{

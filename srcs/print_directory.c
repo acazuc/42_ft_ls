@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 11:06:21 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/02 10:33:32 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/05 15:41:20 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static void		print_file(t_file *file, t_directory *dir)
 	ft_putstr(file->date);
 	ft_putchar(' ');
 	ft_putstr(file->name);
-	ft_putchar('\n');
 }
 
 void			print_subdirs(t_env *env, t_directory *dir)
@@ -79,14 +78,10 @@ void			print_directory(t_env *env, char *path, int is_recur)
 			if (env->l)
 				print_file(lst->file, dir);
 			else
-			{
 				ft_putstr(lst->file->name);
-				ft_putchar(' ');
-			}
+			ft_putchar('\n');
 			lst = lst->next;
 		}
-		if (!(env->l))
-			ft_putchar('\n');
 		print_subdirs(env, dir);
 	}
 	(void)is_recur;

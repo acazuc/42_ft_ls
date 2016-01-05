@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 14:39:31 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/02 10:08:36 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/05 16:00:12 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int				directory_add_file(t_env *env, t_directory *dir
 		, struct dirent *ep)
 {
 	t_file_list		*list;
-	t_file_list		*lst;
+	//t_file_list		*lst;
 	t_file			*file;
 	int				is_dir;
 
@@ -130,7 +130,8 @@ int				directory_add_file(t_env *env, t_directory *dir
 	list->next = NULL;
 	is_dir = load_file(env, file, ep, dir);
 	check_lengths(env, dir, file);
-	if (!(dir->files))
+	add_file(env, dir, list);
+	/*if (!(dir->files))
 		dir->files = list;
 	else
 	{
@@ -138,6 +139,6 @@ int				directory_add_file(t_env *env, t_directory *dir
 		while (lst->next)
 			lst = lst->next;
 		lst->next = list;
-	}
+	}*/
 	return (is_dir);
 }
