@@ -1,32 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   directory.h                                        :+:      :+:    :+:   */
+/*   free_dir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/01 14:30:38 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/06 10:08:56 by acazuc           ###   ########.fr       */
+/*   Created: 2016/01/06 09:32:51 by acazuc            #+#    #+#             */
+/*   Updated: 2016/01/06 10:13:33 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DIRECTORY_H
-# define DIRECTORY_H
+#include "ft_ls.h"
 
-# include "file_list.h"
-
-struct s_directory_list;
-
-typedef struct				s_directory
+void	free_dir_files(t_directory *dir)
 {
-	char					*path;
-	int						links_len;
-	int						user_len;
-	int						group_len;
-	int						size_len;
-	int						total_links;
-	t_file_list				*files;
-	struct s_directory_list	*directories;
-}							t_directory;
+	t_file_list			*list;
+	t_file_list			*prev;
 
-#endif
+	list = dir->files;
+	while (list)
+	{
+		prev = list->next;
+		free(list);
+		list = prev;
+	}
+}
+
+void	free_dir(t_directory *dir)
+{
+	t_directory_list	*d_list;
+	t_directory_list	*d_prev;
+
+	d_list = dir->directories;
+	while (d_list)
+	{
+		d_prev = d_list->next;
+		free(d_list);
+		d_list = d_prev;
+	}
+	free(dir);
+}

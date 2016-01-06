@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 14:39:31 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/05 16:00:12 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/06 10:29:44 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ static void		load_file_symb(t_file *file, struct stat info, t_directory *dir
 	if (r < 0)
 		error_quit("Bad link id, did it changed ?");
 	linkname[info.st_size] = '\0';
-	file->name = ft_strjoin(file->name, " -> ");
-	file->name = ft_strjoin(file->name, linkname);
+	file->name = ft_strjoin_free1(file->name, " -> ");
+	file->name = ft_strjoin_free3(file->name, linkname);
 	pw = getpwuid(info.st_uid);
 	gr = getgrgid(info.st_gid);
 	file->perms = get_file_perms(&info, 1);
 	file->links = ft_itoa(info.st_nlink);
-	file->user = pw->pw_name ? pw->pw_name : "";
-	file->group = gr->gr_name ? gr->gr_name : "";
+	file->user = ft_strdup(pw->pw_name ? pw->pw_name : "");
+	file->group = ft_strdup(gr->gr_name ? gr->gr_name : "");
 	file->size = ft_itoa(info.st_size);
 	file->date = ft_strsub(ctime(&info.st_mtime), 4, 12);
 	file->timestamp = info.st_mtime;
@@ -70,29 +70,33 @@ static int		load_file(t_env *env, t_file *file, struct dirent *ep
 	struct stat		info;
 	struct passwd	*pw;
 	struct group	*gr;
+	char			*loul;
 
 
-	file->name = ep->d_name;
-	stat(ft_strjoin(ft_strjoin(dir->path, "/"), ep->d_name), &info);
+	file->name = ft_strdup(ep->d_name);
+	loul = ft_strjoin_free1(ft_strjoin(dir->path, "/"), ep->d_name);
+	stat(loul, &info);
 	if (env->l)
 	{
-		lstat(ft_strjoin(ft_strjoin(dir->path, "/"), ep->d_name), &linfo);
+		lstat(loul, &linfo);
 		if (info.st_ino != linfo.st_ino)
-			load_file_symb(file, linfo, dir
-					, ft_strjoin(ft_strjoin(dir->path, "/"), ep->d_name));
-		if (info.st_ino != linfo.st_ino)
+		{
+			load_file_symb(file, linfo, dir, loul);
+			free(loul);
 			return (0);
+		}
 		pw = getpwuid(info.st_uid);
 		gr = getgrgid(info.st_gid);
 		file->perms = get_file_perms(&info, 0);
 		file->links = ft_itoa(info.st_nlink);
-		file->user = pw->pw_name ? pw->pw_name : "";
-		file->group = gr->gr_name ? gr->gr_name : "";
+		file->user = ft_strdup(pw->pw_name ? pw->pw_name : "");
+		file->group = ft_strdup(gr->gr_name ? gr->gr_name : "");
 		file->size = ft_itoa(info.st_size);
 		file->date = ft_strsub(ctime(&info.st_mtime), 4, 12);
 		file->timestamp = info.st_mtime;
 		dir->total_links += info.st_blocks;
 	}
+	free(loul);
 	return (S_ISDIR(info.st_mode));
 }
 
@@ -117,7 +121,6 @@ int				directory_add_file(t_env *env, t_directory *dir
 		, struct dirent *ep)
 {
 	t_file_list		*list;
-	//t_file_list		*lst;
 	t_file			*file;
 	int				is_dir;
 
@@ -131,14 +134,5 @@ int				directory_add_file(t_env *env, t_directory *dir
 	is_dir = load_file(env, file, ep, dir);
 	check_lengths(env, dir, file);
 	add_file(env, dir, list);
-	/*if (!(dir->files))
-		dir->files = list;
-	else
-	{
-		lst = dir->files;
-		while (lst->next)
-			lst = lst->next;
-		lst->next = list;
-	}*/
 	return (is_dir);
 }

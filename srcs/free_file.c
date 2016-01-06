@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_reverse.c                                     :+:      :+:    :+:   */
+/*   free_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/01 16:49:27 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/01 17:28:11 by acazuc           ###   ########.fr       */
+/*   Created: 2016/01/06 09:38:27 by acazuc            #+#    #+#             */
+/*   Updated: 2016/01/06 10:13:23 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	sort_reverse(t_directory *dir)
+void	free_file(t_env *env, struct s_file *file)
 {
-	t_file_list	*prev;
-	t_file_list	*current;
-	t_file_list	*next;
-
-	prev = NULL;
-	current = dir->files;
-	next = NULL;
-	while (current != NULL)
+	if (env->l)
 	{
-		next = current->next;
-		current->next = prev;
-		prev = current;
-		current = next;
+		free(file->perms);
+		free(file->links);
+		free(file->user);
+		free(file->group);
+		free(file->size);
+		free(file->date);
 	}
-	dir->files = prev;
+	free(file->name);
+	free(file);
 }

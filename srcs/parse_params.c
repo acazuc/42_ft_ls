@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 11:39:50 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/02 10:18:55 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/06 09:27:29 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void		check(t_env *env, char c)
 	if (c == 'l')
 		env->l = 1;
 	else if (c == 'R')
-		env->R = 1;
+		env->recur = 1;
 	else if (c == 'a')
 		env->a = 1;
 	else if (c == 'r')
