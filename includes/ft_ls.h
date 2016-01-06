@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/31 08:28:42 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/02 08:34:33 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/06 10:41:12 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "../libft/includes/libft.h"
 # include "includes.h"
-# include "file_type.h"
 # include "file_list.h"
 # include "directory.h"
 # include "directory_list.h"

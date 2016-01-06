@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/31 08:30:19 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/06 09:44:40 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/06 10:40:57 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FILE_H
 
 # include "file_list.h"
-# include "file_type.h"
 
 struct					s_file
 {

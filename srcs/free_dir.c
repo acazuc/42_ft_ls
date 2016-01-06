@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 09:32:51 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/06 10:13:33 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/06 10:46:23 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 void	free_dir_files(t_directory *dir)
 {
 	t_file_list			*list;
-	t_file_list			*prev;
+	t_file_list			*next;
 
 	list = dir->files;
 	while (list)
 	{
-		prev = list->next;
+		next = list->next;
 		free(list);
-		list = prev;
+		list = next;
 	}
 }
 
