@@ -6,13 +6,13 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:27:08 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/12 17:06:41 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/12 18:25:09 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void		set_infos_l(t_file *file, struct stat *info)
+static void		set_infos_l(t_env *env, t_file *file, struct stat *info)
 {
 	struct passwd	*pw;
 	struct group	*gr;
@@ -23,8 +23,7 @@ static void		set_infos_l(t_file *file, struct stat *info)
 	file->user = ft_strdup(pw->pw_name ? pw->pw_name : "");
 	file->group = ft_strdup(gr->gr_name ? gr->gr_name : "");
 	file->size = ft_itoa(info->st_size);
-	file->timestamp = info->st_atime;
-	file->date = load_file_date(info);
+	file->date = load_file_date(env, info);
 }
 
 static int		load_file_symb(t_env *env, t_file *file, struct stat *info
@@ -45,9 +44,9 @@ static int		load_file_symb(t_env *env, t_file *file, struct stat *info
 		file->perms = load_file_perms(info, 1);
 		file->name = ft_strjoin_free1(file->name, " -> ");
 		file->name = ft_strjoin_free3(file->name, linkname);
-		set_infos_l(file, info);
+		set_infos_l(env, file, info);
 	}
-	file->timestamp = info->st_atime;
+	file->timestamp = file_time(env, info);
 	return (info->st_blocks);
 }
 
@@ -71,10 +70,10 @@ void		load_file(t_env *env, t_file *file, struct dirent *ep
 	}
 	if (env->l)
 	{
-		set_infos_l(file, &info);
+		set_infos_l(env, file, &info);
 		file->perms = load_file_perms(&info, 0);
 		dir->total_links += info.st_blocks;
 	}
-	file->timestamp = info.st_mtime;
+	file->timestamp = file_time(env, &info);
 	free(loul);
 }

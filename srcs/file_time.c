@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   file_time.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/31 08:23:04 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/12 18:25:36 by acazuc           ###   ########.fr       */
+/*   Created: 2016/01/12 18:10:31 by acazuc            #+#    #+#             */
+/*   Updated: 2016/01/12 18:24:07 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		main(int ac, char **av)
-{
-	t_env			env;
-	int				mdr;
-
-	env.sources = NULL;
-	env.files = NULL;
-	env.l = 0;
-	env.recur = 0;
-	env.a = 0;
-	env.r = 0;
-	env.t = 0;
-	env.u = 0;
-	mdr = parse_params(&env, ac, av);
-	parse_sources(&env, ac, av, mdr);
-	return (0);
+time_t	file_time(t_env *env, struct stat *info)
+{ 
+	if (env->u)
+		return (info->st_atime);
+	return (info->st_mtime);
 }
