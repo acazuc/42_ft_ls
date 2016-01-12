@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:16:35 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/12 18:56:19 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/12 19:08:58 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_file(t_env *env, t_file *file, t_directory *dir)
 	if (env->l)
 	{
 		ft_putstr(file->perms);
-		putspaces(2 + dir->links_len - ft_strlen(file->links));
+		putspaces(1 + dir->links_len - ft_strlen(file->links));
 		ft_putstr(file->links);
 		if (!env->g)
 		{
@@ -37,17 +37,19 @@ void	print_file(t_env *env, t_file *file, t_directory *dir)
 		}
 		if (!env->g_caps)
 		{
-			putspaces(2 + dir->group_len - ft_strlen(file->group));
+			putspaces(1 + dir->group_len - ft_strlen(file->group));
 			ft_putstr(file->group);
 		}
-		putspaces(2 + dir->size_len - ft_strlen(file->size));
+		putspaces(1 + dir->size_len - ft_strlen(file->size));
 		ft_putstr(file->size);
 		putspaces(1 + dir->date_len - ft_strlen(file->date));
 		ft_putstr(file->date);
 		ft_putchar(' ');
-		ft_putstr(file->name);
 	}
-	else
-		ft_putstr(file->name);
+	if (env->q_caps)
+		ft_putchar('"');
+	ft_putstr(file->name);
+	if (env->q_caps)
+		ft_putchar('"');
 	ft_putchar('\n');
 }
