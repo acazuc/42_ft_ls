@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 15:47:26 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/12 13:25:21 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/12 15:23:15 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static int	insert(t_env *env, t_file_list *list, t_file_list *curr)
 	if (env->t)
 	{
 		if (env->r)
-			return (cf->timestamp < lf->timestamp);
+			return (cf->timestamp == lf->timestamp ? ft_strcmp(cf->name, lf->name) > 0 : cf->timestamp < lf->timestamp);
 		else
-			return (cf->timestamp > lf->timestamp);
+			return (cf->timestamp == lf->timestamp ? ft_strcmp(cf->name, lf->name) < 0 : cf->timestamp > lf->timestamp);
 	}
 	else
 	{

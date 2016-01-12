@@ -6,13 +6,13 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 11:06:21 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/12 13:53:06 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/12 16:20:07 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void		putspaces(int number)
+/*static void		putspaces(int number)
 {
 	while (--number >= 0)
 		ft_putchar(' ');
@@ -21,31 +21,24 @@ static void		putspaces(int number)
 static void		print_file(t_file *file, t_directory *dir)
 {
 	ft_putstr(file->perms);
-	putspaces(1 + dir->links_len - ft_strlen(file->links));
+	putspaces(2 + dir->links_len - ft_strlen(file->links));
 	ft_putstr(file->links);
 	putspaces(1 + dir->user_len - ft_strlen(file->user));
 	ft_putstr(file->user);
-	putspaces(1 + dir->group_len - ft_strlen(file->group));
+	putspaces(2 + dir->group_len - ft_strlen(file->group));
 	ft_putstr(file->group);
-	putspaces(1 + dir->size_len - ft_strlen(file->size));
+	putspaces(2 + dir->size_len - ft_strlen(file->size));
 	ft_putstr(file->size);
-	ft_putchar(' ');
+	putspaces(1 + dir->date_len - ft_strlen(file->date));
 	ft_putstr(file->date);
 	ft_putchar(' ');
 	ft_putstr(file->name);
-}
+}*/
 
 void			print_subdirs(t_env *env, t_directory *dir)
-{/*
-	t_directory_list	*lst;
-
-	lst = dir->directories;
-	while (lst)
-	{
-		print_directory(env, lst->path, 1);
-		lst = lst->next;
-	}*/
+{
 	t_file_list		*lst;
+	t_file_list		*prv;
 	char			*tmp;
 
 	lst = dir->files;
@@ -53,12 +46,17 @@ void			print_subdirs(t_env *env, t_directory *dir)
 	{
 		if (lst->file->is_dir)
 		{
-			tmp = ft_strjoin_free1(ft_strjoin(dir->path, "/"), lst->file->name);
-			print_directory(env, tmp, 1);
-			free(tmp);
-			free_file(env, lst->file);
+			if (ft_strcmp(lst->file->name, ".") && ft_strcmp(lst->file->name, ".."))
+			{
+				tmp = ft_strjoin_free1(ft_strjoin(dir->path, "/"), lst->file->name);
+				print_directory(env, tmp, 1);
+				free(tmp);
+			}
 		}
+		free_file(env, lst->file);
+		prv = lst;
 		lst = lst->next;
+		free(prv);
 	}
 }
 
@@ -90,17 +88,16 @@ void			print_directory(t_env *env, char *path, int is_recur)
 		lst = dir->files;
 		while (lst)
 		{
-			if (env->l)
+			/*if (env->l)
 				print_file(lst->file, dir);
 			else
 				ft_putstr(lst->file->name);
-			ft_putchar('\n');
-			if (!lst->file->is_dir)
-				free_file(env, lst->file);
+			ft_putchar('\n');*/
+			print_file(env, lst->file, dir);
 			lst = lst->next;
 		}
-		//free_dir_files(env, dir);
-		print_subdirs(env, dir);
-		free_dir(dir);
+		if (env->recur)
+			print_subdirs(env, dir);
+		free(dir);
 	}
 }

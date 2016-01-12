@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   directory_add_file.c                               :+:      :+:    :+:   */
+/*   load_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/01 14:39:31 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/12 16:27:42 by acazuc           ###   ########.fr       */
+/*   Created: 2016/01/12 16:27:08 by acazuc            #+#    #+#             */
+/*   Updated: 2016/01/12 16:28:30 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,22 +126,4 @@ static void		check_lengths(t_env *env, t_directory *dir, t_file *file)
 			dir->size_len = len;
 		if ((len = ft_strlen(file->date)) > dir->date_len)
 			dir->date_len = len;
-	}
-}
-
-void			directory_add_file(t_env *env, t_directory *dir
-		, struct dirent *ep)
-{
-	t_file_list		*list;
-	t_file			*file;
-
-	if (!(file = malloc(sizeof(*file))))
-		error_quit("Failed to malloc file");
-	if (!(list = malloc(sizeof(*list))))
-		error_quit("Failed to malloc list");
-	list->file = file;
-	list->next = NULL;
-	load_file(env, file, ep, dir);
-	check_lengths(env, dir, file);
-	add_file(env, dir, list);
-}
+	

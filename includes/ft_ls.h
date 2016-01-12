@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/31 08:28:42 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/06 10:41:12 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/12 15:55:46 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "directory.h"
 # include "directory_list.h"
 # include "prototypes.h"
+# include "source.h"
 # include "file.h"
 # include "env.h"
 
