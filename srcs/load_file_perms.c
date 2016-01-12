@@ -6,13 +6,13 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:27:53 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/12 16:28:28 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/12 16:49:48 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static char		*get_file_perms(struct stat *info, int is_link)
+char		*load_file_perms(struct stat *info, int is_link)
 {
 	char	*perms;
 

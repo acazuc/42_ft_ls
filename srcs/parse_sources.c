@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 12:55:35 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/12 16:26:27 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/12 16:36:08 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void		push_source(t_env *env, char *path)
 static void		add_source(t_env *env, char *path)
 {
 	struct stat		info;
-	t_file			*file;
+	//t_file			*file;
 
 	if (stat(path, &info) == -1)
 	{
@@ -59,8 +59,8 @@ static void		add_source(t_env *env, char *path)
 		push_source(env, path);
 	else
 	{
-		file = load_file(path);
-		print_file(env, file, );
+		/*file = load_file(path);
+		print_file(env, file, );*/
 	}
 }
 

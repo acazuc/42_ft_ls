@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/01/12 16:19:09 by acazuc           ###   ########.fr        #
+#    Updated: 2016/01/12 16:59:03 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,9 +25,12 @@ SRCS_NAME = main.c \
 			load_directory.c \
 			directory_add_file.c \
 			error_quit.c \
-			add_file.c \
+			load_file.c \
+			load_file_perms.c \
+			load_file_date.c \
 			free_file.c \
-			print_file.c
+			print_file.c \
+			add_file.c
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 
