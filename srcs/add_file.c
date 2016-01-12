@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 15:47:26 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/12 18:32:13 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/12 18:48:22 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,19 @@ static int	insert(t_env *env, t_file_list *list, t_file_list *curr)
 		return (0);
 	lf = list->file;
 	cf = curr->file;
-	if (env->t)
+	if (env->s_caps)
 	{
 		if (env->r)
-			return (cf->timestamp == lf->timestamp ? ft_strcmp(cf->name, lf->name) > 0 : cf->timestamp < lf->timestamp);
+			return (cf->sort_size == lf->sort_size ? ft_strcmp(cf->name, lf->name) > 0 : cf->sort_size < lf->sort_size);
 		else
-			return (cf->timestamp == lf->timestamp ? ft_strcmp(cf->name, lf->name) < 0 : cf->timestamp > lf->timestamp);
+			return (cf->sort_size == lf->sort_size ? ft_strcmp(cf->name, lf->name) < 0 : cf->sort_size > lf->sort_size);
+	}
+	else if (env->t)
+	{
+		if (env->r)
+			return (cf->sort_date == lf->sort_date ? ft_strcmp(cf->name, lf->name) > 0 : cf->sort_date < lf->sort_date);
+		else
+			return (cf->sort_date == lf->sort_date ? ft_strcmp(cf->name, lf->name) < 0 : cf->sort_date > lf->sort_date);
 	}
 	else
 	{
