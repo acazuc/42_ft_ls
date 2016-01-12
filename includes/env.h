@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/31 09:38:50 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/12 19:05:10 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/12 19:11:17 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ typedef struct			s_env
 {
 	int					a;
 	int					g;
-	int					g_caps;
 	int					i;
 	int					l;
 	int					n;
+	int					o;
 	int					r;
 	int					q_caps;
 	int					r_caps;

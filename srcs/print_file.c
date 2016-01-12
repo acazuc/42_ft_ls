@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:16:35 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/12 19:08:58 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/12 19:11:40 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	print_file(t_env *env, t_file *file, t_directory *dir)
 			putspaces(1 + dir->user_len - ft_strlen(file->user));
 			ft_putstr(file->user);
 		}
-		if (!env->g_caps)
+		if (!env->o)
 		{
 			putspaces(1 + dir->group_len - ft_strlen(file->group));
 			ft_putstr(file->group);
