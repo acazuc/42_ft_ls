@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/31 08:30:19 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/06 10:40:57 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/12 13:25:36 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ struct					s_file
 	char				*group;
 	char				*size;
 	char				*date;
+	int					is_dir;
 	long				timestamp;
 };
 

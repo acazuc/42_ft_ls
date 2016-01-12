@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 12:55:35 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/06 09:30:43 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/12 13:13:00 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	parse_sources(t_env *env, int ac, char **av, int c)
 	int		i;
 
 	printed = 0;
-	i = 1;
+	i = c;
 	while (i < ac)
 	{
-		if (av[i][0] != '-' && av[i][0] != '\0')
+		if (av[i][0] != '\0')
 		{
 			if (av[i][ft_strlen(av[i]) - 1] == '/' && ft_strlen(av[i]) > 1)
 				av[i][ft_strlen(av[i]) - 1] = '\0';

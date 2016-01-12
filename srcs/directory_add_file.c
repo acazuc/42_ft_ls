@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 14:39:31 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/06 10:37:37 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/12 13:39:24 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static void		load_file_symb(t_file *file, struct stat info, t_directory *dir
 	linkname[info.st_size] = '\0';
 	file->name = ft_strjoin_free1(file->name, " -> ");
 	file->name = ft_strjoin_free3(file->name, linkname);
+	file->is_dir = S_ISDIR(info.st_mode);
 	pw = getpwuid(info.st_uid);
 	gr = getgrgid(info.st_gid);
 	file->perms = get_file_perms(&info, 1);
@@ -78,10 +79,10 @@ static int		load_file(t_env *env, t_file *file, struct dirent *ep
 	struct group	*gr;
 	char			*loul;
 
-
 	file->name = ft_strdup(ep->d_name);
 	loul = ft_strjoin_free1(ft_strjoin(dir->path, "/"), ep->d_name);
 	stat(loul, &info);
+	file->is_dir = S_ISDIR(info.st_mode);
 	if (env->l)
 	{
 		lstat(loul, &linfo);
@@ -102,6 +103,7 @@ static int		load_file(t_env *env, t_file *file, struct dirent *ep
 		file->timestamp = info.st_mtime;
 		dir->total_links += info.st_blocks;
 	}
+	file->timestamp = info.st_mtime;
 	free(loul);
 	return (S_ISDIR(info.st_mode));
 }

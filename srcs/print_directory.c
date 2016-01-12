@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 11:06:21 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/06 10:46:15 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/12 13:53:06 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,28 @@ static void		print_file(t_file *file, t_directory *dir)
 }
 
 void			print_subdirs(t_env *env, t_directory *dir)
-{
+{/*
 	t_directory_list	*lst;
 
 	lst = dir->directories;
 	while (lst)
 	{
 		print_directory(env, lst->path, 1);
+		lst = lst->next;
+	}*/
+	t_file_list		*lst;
+	char			*tmp;
+
+	lst = dir->files;
+	while (lst)
+	{
+		if (lst->file->is_dir)
+		{
+			tmp = ft_strjoin_free1(ft_strjoin(dir->path, "/"), lst->file->name);
+			print_directory(env, tmp, 1);
+			free(tmp);
+			free_file(env, lst->file);
+		}
 		lst = lst->next;
 	}
 }
@@ -80,10 +95,11 @@ void			print_directory(t_env *env, char *path, int is_recur)
 			else
 				ft_putstr(lst->file->name);
 			ft_putchar('\n');
-			free_file(env, lst->file);
+			if (!lst->file->is_dir)
+				free_file(env, lst->file);
 			lst = lst->next;
 		}
-		free_dir_files(env, dir);
+		//free_dir_files(env, dir);
 		print_subdirs(env, dir);
 		free_dir(dir);
 	}
