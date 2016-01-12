@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 11:06:21 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/12 16:49:40 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/12 18:32:35 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void			print_directory(t_env *env, char *path, int is_recur)
 			print_file(env, lst->file, dir);
 			lst = lst->next;
 		}
-		if (env->recur)
+		if (env->r_caps)
 			print_subdirs(env, dir);
 		free(dir);
 	}

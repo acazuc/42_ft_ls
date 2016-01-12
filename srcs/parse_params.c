@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 11:39:50 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/12 18:20:41 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/12 18:31:30 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void		check(t_env *env, char c)
 	if (c == 'l')
 		env->l = 1;
 	else if (c == 'R')
-		env->recur = 1;
+		env->r_caps = 1;
 	else if (c == 'a')
 		env->a = 1;
 	else if (c == 'r')
@@ -26,6 +26,8 @@ static void		check(t_env *env, char c)
 		env->t = 1;
 	else if (c == 'u')
 		env->u = 1;
+	else if (c == 'U')
+		env->u_caps = 1;
 	else
 	{
 		ft_putstr("ft_ls: invalid option -- '");
