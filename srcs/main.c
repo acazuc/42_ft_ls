@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/31 08:23:04 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/12 19:38:34 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/12 19:40:45 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		main(int ac, char **av)
 	env.n = 0;
 	env.o = 0;
 	env.p = 0;
+	env.p_caps = 0;
 	env.r = 0;
 	env.r_caps = 0;
 	env.s_caps = 0;

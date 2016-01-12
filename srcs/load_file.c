@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:27:08 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/12 19:00:26 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/12 19:41:35 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,15 @@ void		load_file(t_env *env, t_file *file, struct dirent *ep
 	loul = ft_strjoin_free1(ft_strjoin(dir->path, "/"), ep->d_name);
 	stat(loul, &info);
 	file->is_dir = S_ISDIR(info.st_mode);
-	lstat(loul, &linfo);
-	if (info.st_ino != linfo.st_ino)
+	if (!env->p_caps)
 	{
-		dir->total_links += load_file_symb(env, file, &linfo, loul);
-		free(loul);
-		return ;
+		lstat(loul, &linfo);
+		if (info.st_ino != linfo.st_ino)
+		{
+			dir->total_links += load_file_symb(env, file, &linfo, loul);
+			free(loul);
+			return ;
+		}
 	}
 	if (env->l)
 	{
