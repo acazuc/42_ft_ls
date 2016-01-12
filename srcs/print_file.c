@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:16:35 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/12 18:39:16 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/12 18:56:19 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ static void		putspaces(int number)
 
 void	print_file(t_env *env, t_file *file, t_directory *dir)
 {
+	if (env->i)
+	{
+		ft_putnbr(file->inode);
+		ft_putchar(' ');
+	}
 	if (env->l)
 	{
 		ft_putstr(file->perms);
@@ -43,8 +48,6 @@ void	print_file(t_env *env, t_file *file, t_directory *dir)
 		ft_putstr(file->name);
 	}
 	else
-	{
 		ft_putstr(file->name);
-	}
 	ft_putchar('\n');
 }
