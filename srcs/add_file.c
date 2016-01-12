@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 15:47:26 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/12 18:48:22 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/12 19:35:37 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ static int	insert(t_env *env, t_file_list *list, t_file_list *curr)
 	t_file			*lf;
 	t_file			*cf;
 
-	if (env->u_caps)
-		return (0);
 	lf = list->file;
 	cf = curr->file;
+	if (env->f)
+		return (0);
 	if (env->s_caps)
 	{
 		if (env->r)

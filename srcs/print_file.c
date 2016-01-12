@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:16:35 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/12 19:11:40 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/12 19:34:39 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,6 @@ void	print_file(t_env *env, t_file *file, t_directory *dir)
 		ft_putstr(file->date);
 		ft_putchar(' ');
 	}
-	if (env->q_caps)
-		ft_putchar('"');
 	ft_putstr(file->name);
-	if (env->q_caps)
-		ft_putchar('"');
 	ft_putchar('\n');
 }
