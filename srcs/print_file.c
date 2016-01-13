@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:16:35 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 15:07:21 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 16:07:32 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,22 @@ void			print_file(t_env *env, t_file *file, t_directory *dir)
 		ft_putchar(' ');
 	}
 	ft_putstr(file->name);
-	if (env->p && file->is_dir)
+	if (env->f_caps)
+	{
+		if (file->is_lnk)
+			ft_putchar('@');
+		else if (file->is_dir)
+			ft_putchar('/');
+		else if (file->is_sock)
+			ft_putchar('=');
+		else if (file->is_exe)
+			ft_putchar('*');
+		else if (file->is_whout)
+			ft_putchar('%');
+		else if (file->is_fifo)
+			ft_putchar('|');
+	}
+	else if (env->p && file->is_dir)
 		ft_putchar('/');
 	ft_putchar('\n');
 }

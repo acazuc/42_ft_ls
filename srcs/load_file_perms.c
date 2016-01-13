@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:27:53 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 13:27:34 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 16:07:28 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static char	get_char_0(struct stat *info)
 {
 	if (S_ISLNK(info->st_mode))
 		return ('l');
+	else if (S_ISSOCK(info->st_mode))
+		return ('s');
 	else if (S_IFDIR & info->st_mode)
 		return ('d');
 	else if (S_IFBLK & info->st_mode)

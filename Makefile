@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/01/13 12:48:14 by acazuc           ###   ########.fr        #
+#    Updated: 2016/01/13 15:41:04 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS_NAME = main.c \
 			load_file.c \
 			load_file_perms.c \
 			load_file_date.c \
+			load_file_type.c \
 			free_file.c \
 			print_file.c \
 			add_file.c \
