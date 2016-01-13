@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/31 08:29:24 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 16:20:59 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 16:40:50 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <dirent.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <errno.h>
 # include <unistd.h>
 
 #endif

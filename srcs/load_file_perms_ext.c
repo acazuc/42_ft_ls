@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 16:10:57 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 16:28:55 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 16:41:16 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@ char	load_file_perms_ext(char *path)
 	ssize_t		attr;
 	char		*buf;
 
-	buf = ft_memalloc(500);
-	attr = listxattr(path, buf, 500, 0);
-	//printf("listxattr: %zd, buff: %s\n", attr, buf);
-	if (attr == 21)
+	if (!(buf = ft_memalloc(1)))
+		error_quit("Failed to malloc");
+	attr = listxattr(path, buf, 1, 0);
+	free(buf);
+	if (errno == ERANGE || attr > 0)
 		return ('@');
 	return (' ');
 }
