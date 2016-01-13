@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/01/12 18:15:17 by acazuc           ###   ########.fr        #
+#    Updated: 2016/01/13 12:48:14 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ SRCS_NAME = main.c \
 			free_file.c \
 			print_file.c \
 			add_file.c \
-			file_time.c
+			file_time.c \
+			parse_source_push.c
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 

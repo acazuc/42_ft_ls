@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 12:55:35 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 12:31:09 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 12:53:37 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,17 @@ static void		print_sources(t_env *env, int recur)
 	}
 }
 
-static void		push_source(t_env *env, char *path, char *display_path)
+static void		push_source(t_env *env, char *path, char *display_path, struct stat *info)
 {
-	t_source		*lst;
 	t_source		*new;
 
 	if (!(new = malloc(sizeof(*new))))
 		error_quit("Failed");
 	new->display_path = display_path;
 	new->path = path;
+	new->sort_date = file_time(env, info);
 	new->next = NULL;
-	lst = env->sources;
-	if (!lst)
-		env->sources = new;
-	else
-	{
-		while (lst->next)
-			lst = lst->next;
-		lst->next = new;
-	}
+	parse_source_push(env, new);
 }
 
 static int		add_source(t_env *env, char *path, t_directory *dir, char *display_path)
@@ -73,7 +65,7 @@ static int		add_source(t_env *env, char *path, t_directory *dir, char *display_p
 	}
 	if (S_ISDIR(info.st_mode))
 	{
-		push_source(env, path, display_path);
+		push_source(env, path, display_path, &info);
 		return (0);
 	}
 	directory_add_file(env, dir, path);
