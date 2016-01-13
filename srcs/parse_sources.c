@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 12:55:35 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 10:52:30 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 11:31:36 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int		add_source(t_env *env, char *path, t_directory *dir)
 
 	if (stat(path, &info) == -1)
 	{
-		ft_putstr("ft_ls: ");
+		ft_putstr("ls: ");
 		perror(path);
 		return (0);;
 	}

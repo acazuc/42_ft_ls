@@ -6,13 +6,70 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 11:39:50 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 09:33:33 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 11:22:43 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void		check(t_env *env, char c)
+static void		error_options(char c)
+{
+	ft_putstr("ls: invalid option -- '");
+	ft_putchar(c);
+	ft_putendl("'");
+	exit(-1);
+}
+
+static void		check3(t_env *env, char c)
+{
+	if (c == 'A')
+		env->a_caps = 1;
+	else if (c == 'f')
+	{
+		env->a = 1;
+		env->f = 1;
+	}
+	else if (c == 'p')
+		env->p = 1;
+	else if (c == 'P')
+		env->p_caps = 1;
+	else if (c == '1')
+		(void)c;
+	else if (c == '-')
+		(void)c;
+	else
+		error_options(c);
+}
+
+static void		check2(t_env *env, char c)
+{
+	if (c == 'o')
+	{
+		env->l = 1;
+		env->o = 1;
+	}
+	else if (c == 'f')
+	{
+		env->a = 1;
+		env->f = 1;
+	}
+	else if (c == 'S')
+	{
+		env->t = 0;
+		env->s_caps = 1;
+	}
+	else if (c == 'i')
+		env->i = 1;
+	else if (c == 'n')
+	{
+		env->l = 1;
+		env->n = 1;
+	}
+	else
+		check3(env, c);
+}
+
+static void		check1(t_env *env, char c)
 {
 	if (c == 'l')
 		env->l = 1;
@@ -35,50 +92,8 @@ static void		check(t_env *env, char c)
 		env->l = 1;
 		env->g = 1;
 	}
-	else if (c == 'o')
-	{
-		env->l = 1;
-		env->o = 1;
-	}
-	else if (c == 'f')
-	{
-		env->a = 1;
-		env->f = 1;
-	}
-	else if (c == 'S')
-	{
-		env->t = 0;
-		env->s_caps = 1;
-	}
-	else if (c == 'i')
-		env->i = 1;
-	else if (c == 'n')
-	{
-		env->l = 1;
-		env->n = 1;
-	}
-	else if (c == 'A')
-		env->a_caps = 1;
-	else if (c == 'f')
-	{
-		env->a = 1;
-		env->f = 1;
-	}
-	else if (c == 'p')
-		env->p = 1;
-	else if (c == 'P')
-		env->p_caps = 1;
-	else if (c == '1')
-		(void)c;
-	else if (c == '-')
-		(void)c;
 	else
-	{
-		ft_putstr("ft_ls: invalid option -- '");
-		ft_putchar(c);
-		ft_putendl("'");
-		exit(-1);
-	}
+		check2(env, c);
 }
 
 int				parse_params(t_env *env, int agrumes, char **les_agruments)
@@ -89,9 +104,16 @@ int				parse_params(t_env *env, int agrumes, char **les_agruments)
 	sous_lbus = 1;
 	while (sous_lbus < agrumes && les_agruments[sous_lbus][0] == '-' && les_agruments[sous_lbus][1] != '\0')
 	{
+		if (les_agruments[sous_lbus][1] == '-')
+		{
+			if (les_agruments[sous_lbus][2] != '\0')
+				error_options('-');
+			else
+				return (sous_lbus + 1);
+		}
 		plus_plus = 0;
 		while (les_agruments[sous_lbus][++plus_plus])
-			check(env, les_agruments[sous_lbus][plus_plus]);
+			check1(env, les_agruments[sous_lbus][plus_plus]);
 		++sous_lbus;
 	}
 	return (sous_lbus);

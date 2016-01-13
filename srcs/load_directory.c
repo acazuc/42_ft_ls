@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 14:32:35 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 11:04:30 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 11:31:29 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_directory	*load_directory(t_env *env, char *path)
 	}
 	else
 	{
-		perror(ft_strjoin("ft_ls: ", path));
+		perror(ft_strjoin("ls: ", path));
 		return (NULL);
 	}
 	return (directory);
