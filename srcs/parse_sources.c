@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 12:55:35 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 15:09:34 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 17:52:56 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,15 @@ static int		add_source(t_env *env, char *path, t_directory *dir
 		, char *display_path)
 {
 	struct stat		info;
+	struct stat		linfo;
 
-	if (stat(path, &info) == -1 && lstat(path, &info) == -1)
+	if (stat(path, &info) == -1 & lstat(path, &linfo) == -1)
 	{
 		ft_putstr_fd("ls: ", 2);
 		perror(path);
 		return (0);
 	}
-	if (S_ISDIR(info.st_mode))
+	if (S_ISDIR(info.st_mode) && (!env->l || S_ISDIR(linfo.st_mode)))
 	{
 		push_source(env, path, display_path, &info);
 		return (0);
