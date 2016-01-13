@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:27:53 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 16:20:13 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 17:04:46 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ char		*load_file_perms(char *path, struct stat *info)
 	perms[7] = info->st_mode & S_IROTH ? 'r' : '-';
 	perms[8] = info->st_mode & S_IWOTH ? 'w' : '-';
 	perms[9] = get_char_9(info);
-	perms[10] = load_file_perms_ext(path);
+	perms[10] = ' ';
 	perms[11] = '\0';
 	return (perms);
 }
