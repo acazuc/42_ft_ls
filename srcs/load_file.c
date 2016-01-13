@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:27:08 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/12 19:41:35 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 08:39:03 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void		set_infos_l(t_env *env, t_file *file, struct stat *info)
 		file->user = ft_strdup(pw->pw_name ? pw->pw_name : "");
 		file->group = ft_strdup(gr->gr_name ? gr->gr_name : "");
 	}
+	file->perms = load_file_perms(info);
 	file->links = ft_itoa(info->st_nlink);
 	file->size = ft_itoa(info->st_size);
 	file->sort_size = info->st_size;
@@ -50,7 +51,6 @@ static int		load_file_symb(t_env *env, t_file *file, struct stat *info
 	file->is_dir = S_ISDIR(info->st_mode);
 	if (env->l)
 	{
-		file->perms = load_file_perms(info, 1);
 		file->name = ft_strjoin_free1(file->name, " -> ");
 		file->name = ft_strjoin_free3(file->name, linkname);
 		set_infos_l(env, file, info);
@@ -84,7 +84,6 @@ void		load_file(t_env *env, t_file *file, struct dirent *ep
 	if (env->l)
 	{
 		set_infos_l(env, file, &info);
-		file->perms = load_file_perms(&info, 0);
 		dir->total_links += info.st_blocks;
 	}
 	file->inode = info.st_ino;
