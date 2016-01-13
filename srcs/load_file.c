@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:27:08 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 08:52:46 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 09:12:19 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static void		set_infos_l(t_env *env, t_file *file, struct stat *info)
 	file->perms = load_file_perms(info);
 	file->links = ft_itoa(info->st_nlink);
 	file->size = ft_itoa(info->st_size);
-	file->sort_size = info->st_size;
 	file->date = load_file_date(env, info);
 }
 
@@ -56,6 +55,7 @@ static int		load_file_symb(t_env *env, t_file *file, struct stat *info
 		set_infos_l(env, file, info);
 	}
 	file->inode = info->st_ino;
+	file->sort_size = info->st_size;
 	file->sort_date = file_time(env, info);
 	return (info->st_blocks);
 }
@@ -74,7 +74,7 @@ void		load_file(t_env *env, t_file *file, struct dirent *ep
 	if (!env->p_caps)
 	{
 		lstat(loul, &linfo);
-		if (info.st_ino != linfo.st_io)
+		if (info.st_ino != linfo.st_ino)
 		{
 			dir->total_links += load_file_symb(env, file, &linfo, loul);
 			free(loul);
@@ -87,6 +87,7 @@ void		load_file(t_env *env, t_file *file, struct dirent *ep
 		dir->total_links += info.st_blocks;
 	}
 	file->inode = info.st_ino;
+	file->sort_size = info.st_size;
 	file->sort_date = file_time(env, &info);
 	free(loul);
 }
