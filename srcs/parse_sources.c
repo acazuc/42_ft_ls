@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 12:55:35 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 13:40:42 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 14:52:12 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,16 +86,20 @@ void			parse_sources(t_env *env, int ac, char **av, int c)
 	printed = 0;
 	printed_file = 0;
 	i = c;
-	while (i < ac)
-	{
-		if (av[i][0] != '\0')
+	while (av[i])
+		if (!av[i++][0])
 		{
-			display_path = ft_strdup(av[i]);
-			if (av[i][ft_strlen(av[i]) - 1] == '/' && ft_strlen(av[i]) > 1)
-				av[i][ft_strlen(av[i]) - 1] = '\0';
-			printed_file += add_source(env, av[i], &dir, display_path);
-			printed = 1;
+			ft_putendl_fd("ls: fts_open: No such file or directory", 2);
+			exit(-1);
 		}
+	i = c;
+	while (av[i])
+	{
+		display_path = ft_strdup(av[i]);
+		if (av[i][ft_strlen(av[i]) - 1] == '/' && ft_strlen(av[i]) > 1)
+			av[i][ft_strlen(av[i]) - 1] = '\0';
+		printed_file += add_source(env, av[i], &dir, display_path);
+		printed = 1;
 		i++;
 	}
 	print_dir(env, &dir);
