@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:27:08 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 08:39:03 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 08:52:46 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void		load_file(t_env *env, t_file *file, struct dirent *ep
 	if (!env->p_caps)
 	{
 		lstat(loul, &linfo);
-		if (info.st_ino != linfo.st_ino)
+		if (info.st_ino != linfo.st_io)
 		{
 			dir->total_links += load_file_symb(env, file, &linfo, loul);
 			free(loul);
