@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:27:08 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 09:12:19 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 09:47:30 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,14 @@ static int		load_file_symb(t_env *env, t_file *file, struct stat *info
 	return (info->st_blocks);
 }
 
-void		load_file(t_env *env, t_file *file, struct dirent *ep
-		, t_directory *dir)
+void		load_file(t_env *env, t_file *file, char *name, t_directory *dir)
 {
 	struct stat		linfo;
 	struct stat		info;
 	char			*loul;
 
-	file->name = ft_strdup(ep->d_name);
-	loul = ft_strjoin_free1(ft_strjoin(dir->path, "/"), ep->d_name);
+	file->name = ft_strdup(name);
+	loul = ft_strjoin_free1(ft_strjoin(dir->path, "/"), name);
 	stat(loul, &info);
 	file->is_dir = S_ISDIR(info.st_mode);
 	if (!env->p_caps)

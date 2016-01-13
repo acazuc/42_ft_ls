@@ -6,13 +6,13 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 14:32:35 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 08:26:39 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 09:42:25 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void	directory_init(t_directory *dir, char *path)
+void		directory_init(t_directory *dir, char *path)
 {
 	dir->files = NULL;
 	dir->path = path;
@@ -38,7 +38,7 @@ t_directory	*load_directory(t_env *env, char *path)
 		while ((ep = readdir(dir)))
 		{
 			if (env->a || ep->d_name[0] != '.' || (env->a_caps && ft_strcmp(ep->d_name, ".") && ft_strcmp(ep->d_name, "..")))
-				directory_add_file(env, directory, ep);
+				directory_add_file(env, directory, ep->d_name);
 		}
 		closedir(dir);
 	}

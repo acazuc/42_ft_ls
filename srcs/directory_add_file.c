@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 14:39:31 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/12 16:39:39 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 09:40:38 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ static void		check_lengths(t_env *env, t_directory *dir, t_file *file)
 	}
 }
 
-void			directory_add_file(t_env *env, t_directory *dir
-		, struct dirent *ep)
+void			directory_add_file(t_env *env, t_directory *dir, char *name)
 {
 	t_file_list		*list;
 	t_file			*file;
@@ -43,7 +42,7 @@ void			directory_add_file(t_env *env, t_directory *dir
 		error_quit("Failed to malloc list");
 	list->file = file;
 	list->next = NULL;
-	load_file(env, file, ep, dir);
+	load_file(env, file, name, dir);
 	check_lengths(env, dir, file);
 	add_file(env, dir, list);
 }
