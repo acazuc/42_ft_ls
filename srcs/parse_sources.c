@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 12:55:35 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 11:31:36 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 12:31:09 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,19 @@ static void		print_sources(t_env *env, int recur)
 	lst = env->sources;
 	while (lst)
 	{
-		print_directory(env, lst->path, recur);
+		print_directory(env, lst->path, recur, lst->display_path);
 		lst = lst->next;
 	}
 }
 
-static void		push_source(t_env *env, char *path)
+static void		push_source(t_env *env, char *path, char *display_path)
 {
 	t_source		*lst;
 	t_source		*new;
 
 	if (!(new = malloc(sizeof(*new))))
 		error_quit("Failed");
+	new->display_path = display_path;
 	new->path = path;
 	new->next = NULL;
 	lst = env->sources;
@@ -60,19 +61,19 @@ static void		push_source(t_env *env, char *path)
 	}
 }
 
-static int		add_source(t_env *env, char *path, t_directory *dir)
+static int		add_source(t_env *env, char *path, t_directory *dir, char *display_path)
 {
 	struct stat		info;
 
-	if (stat(path, &info) == -1)
+	if (stat(path, &info) == -1 && lstat(path, &info) == -1)
 	{
 		ft_putstr("ls: ");
 		perror(path);
-		return (0);;
+		return (0);
 	}
 	if (S_ISDIR(info.st_mode))
 	{
-		push_source(env, path);
+		push_source(env, path, display_path);
 		return (0);
 	}
 	directory_add_file(env, dir, path);
@@ -82,15 +83,12 @@ static int		add_source(t_env *env, char *path, t_directory *dir)
 void			parse_sources(t_env *env, int ac, char **av, int c)
 {
 	t_directory		dir;
-	char			*dir_path;
+	char			*display_path;
 	int				printed_file;
 	int				printed;
 	int				i;
 
-	if (!(dir_path = ft_memalloc(2)))
-		error_quit("Failed to malloc dir path");
-	dir_path[0] = '.';
-	directory_init(&dir, dir_path);
+	directory_init(&dir, ".");
 	printed = 0;
 	printed_file = 0;
 	i = c;
@@ -98,16 +96,17 @@ void			parse_sources(t_env *env, int ac, char **av, int c)
 	{
 		if (av[i][0] != '\0')
 		{
+			display_path = ft_strdup(av[i]);
 			if (av[i][ft_strlen(av[i]) - 1] == '/' && ft_strlen(av[i]) > 1)
 				av[i][ft_strlen(av[i]) - 1] = '\0';
-			printed_file += add_source(env, av[i], &dir);
+			printed_file += add_source(env, av[i], &dir, display_path);
 			printed = 1;
 		}
 		i++;
 	}
 	print_dir(env, &dir);
 	if (!printed)
-		print_directory(env, ".", 0);
+		print_directory(env, ".", 0, ft_strdup("."));
 	else
 		print_sources(env, printed_file || ac - c >= 2);
 }

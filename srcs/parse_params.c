@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 11:39:50 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 11:22:43 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 12:05:16 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,8 @@ int				parse_params(t_env *env, int agrumes, char **les_agruments)
 	int		sous_lbus;
 
 	sous_lbus = 1;
-	while (sous_lbus < agrumes && les_agruments[sous_lbus][0] == '-' && les_agruments[sous_lbus][1] != '\0')
+	while (sous_lbus < agrumes && les_agruments[sous_lbus][0] == '-'
+			&& les_agruments[sous_lbus][1] != '\0')
 	{
 		if (les_agruments[sous_lbus][1] == '-')
 		{

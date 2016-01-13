@@ -6,19 +6,14 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/05 15:47:26 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 09:34:33 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 12:02:10 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static int	insert(t_env *env, t_file_list *list, t_file_list *curr)
+static int	insert(t_env *env, t_file *lf, t_file *cf)
 {
-	t_file			*lf;
-	t_file			*cf;
-
-	lf = list->file;
-	cf = curr->file;
 	if (env->f)
 		return (0);
 	if (env->s_caps && cf->sort_size != lf->sort_size)
@@ -68,7 +63,7 @@ void		add_file(t_env *env, t_directory *dir, t_file_list *list)
 	prv = NULL;
 	while (lst)
 	{
-		if (insert(env, lst, list))
+		if (insert(env, lst->file, list->file))
 		{
 			swap(list, lst, prv, dir);
 			return ;

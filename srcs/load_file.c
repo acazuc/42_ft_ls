@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:27:08 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 11:24:24 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 12:17:11 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@ static void		set_infos_l(t_env *env, t_file *file, struct stat *info)
 	file->date = load_file_date(env, info);
 }
 
+static void		set_other_infos(t_env *env, t_file *file, struct stat *info)
+{
+	file->inode = info->st_ino;
+	file->sort_size = info->st_size;
+	file->sort_date = file_time(env, info);
+}
+
 static int		load_file_symb(t_env *env, t_file *file, struct stat *info
 		, char *rpath)
 {
@@ -54,9 +61,7 @@ static int		load_file_symb(t_env *env, t_file *file, struct stat *info
 		file->name = ft_strjoin_free3(file->name, linkname);
 		set_infos_l(env, file, info);
 	}
-	file->inode = info->st_ino;
-	file->sort_size = info->st_size;
-	file->sort_date = file_time(env, info);
+	set_other_infos(env, file, info);
 	return (info->st_blocks);
 }
 
@@ -72,8 +77,7 @@ void		load_file(t_env *env, t_file *file, char *name, t_directory *dir)
 	file->is_dir = S_ISDIR(info.st_mode);
 	if (!env->p_caps)
 	{
-		lstat(loul, &linfo);
-		if (info.st_ino != linfo.st_ino)
+		if (lstat(loul, &linfo) == 0 && info.st_ino != linfo.st_ino)
 		{
 			dir->total_links += load_file_symb(env, file, &linfo, loul);
 			free(loul);
@@ -85,8 +89,6 @@ void		load_file(t_env *env, t_file *file, char *name, t_directory *dir)
 		set_infos_l(env, file, &info);
 		dir->total_links += info.st_blocks;
 	}
-	file->inode = info.st_ino;
-	file->sort_size = info.st_size;
-	file->sort_date = file_time(env, &info);
+	set_other_infos(env, file, &info);
 	free(loul);
 }

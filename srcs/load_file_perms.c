@@ -6,11 +6,27 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:27:53 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 09:11:56 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 12:04:45 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+static char	load_first_letter(struct stat *info)
+{
+	if (S_ISLNK(info->st_mode))
+		return ('l');
+	else if (S_IFDIR & info->st_mode)
+		return ('d');
+	else if (S_IFBLK & info->st_mode)
+		return ('b');
+	else if (S_IFCHR & info->st_mode)
+		return ('c');
+	else if (S_IFIFO & info->st_mode)
+		return ('p');
+	else
+		return ('-');
+}
 
 char		*load_file_perms(struct stat *info)
 {
@@ -18,18 +34,7 @@ char		*load_file_perms(struct stat *info)
 
 	if (!(perms = malloc(sizeof(*perms) * 12)))
 		error_quit("Failed to malloc file perms");
-	if (S_ISLNK(info->st_mode))
-		perms[0] = 'l';
-	else if (S_IFDIR & info->st_mode)
-		perms[0] = 'd';
-	else if (S_IFBLK & info->st_mode)
-		perms[0] = 'b';
-	else if (S_IFCHR & info->st_mode)
-		perms[0] = 'c';
-	else if (S_IFIFO & info->st_mode)
-		perms[0] = 'p';
-	else
-		perms[0] = '-';
+	perms[0] = load_first_letter(info);
 	perms[1] = info->st_mode & S_IRUSR ? 'r' : '-';
 	perms[2] = info->st_mode & S_IWUSR ? 'w' : '-';
 	if (info->st_mode & S_ISUID)
@@ -49,4 +54,3 @@ char		*load_file_perms(struct stat *info)
 	perms[11] = '\0';
 	return (perms);
 }
-

@@ -6,13 +6,13 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 11:06:21 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 11:13:05 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 12:34:54 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void			print_subdirs(t_env *env, t_directory *dir)
+void				print_subdirs(t_env *env, t_directory *dir)
 {
 	t_file_list		*lst;
 	t_file_list		*prv;
@@ -23,10 +23,12 @@ void			print_subdirs(t_env *env, t_directory *dir)
 	{
 		if (lst->file->is_dir)
 		{
-			if (ft_strcmp(lst->file->name, ".") && ft_strcmp(lst->file->name, ".."))
+			if (ft_strcmp(lst->file->name, ".")
+					&& ft_strcmp(lst->file->name, ".."))
 			{
-				tmp = ft_strjoin_free1(ft_strjoin(dir->path, "/"), lst->file->name);
-				print_directory(env, tmp, 1);
+				tmp = ft_strjoin_free1(ft_strjoin(dir->path, "/")
+						, lst->file->name);
+				print_directory(env, tmp, 1, ft_strdup(tmp));
 				free(tmp);
 			}
 		}
@@ -58,12 +60,12 @@ static void			print_directory_part2(t_env *env, t_directory *dir)
 	}
 }
 
-void			print_directory(t_env *env, char *path, int is_recur)
+void				print_directory(t_env *env, char *path, int is_recur, char *display_path)
 {
 	t_directory			*dir;
 	t_file_list			*lst;
 
-	print_directory_part(is_recur, path, env);
+	print_directory_part(is_recur, display_path, env);
 	if ((dir = load_directory(env, path)))
 	{
 		print_directory_part2(env, dir);
@@ -78,4 +80,5 @@ void			print_directory(t_env *env, char *path, int is_recur)
 			print_subdirs(env, dir);
 		free(dir);
 	}
+	free(display_path);
 }
