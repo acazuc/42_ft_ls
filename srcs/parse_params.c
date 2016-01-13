@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 11:39:50 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 15:32:26 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 16:33:11 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ static void		check3(t_env *env, char c)
 		env->f = 1;
 	}
 	else if (c == 'p')
+	{
 		env->p = 1;
+		env->f_caps = 0;
+	}
 	else if (c == 'P')
 		env->p_caps = 1;
 	else if (c == '1')
@@ -44,7 +47,10 @@ static void		check3(t_env *env, char c)
 		env->c = 1;
 	}
 	else if (c == 'F')
+	{
+		env->p = 0;
 		env->f_caps = 1;
+	}
 	else
 		error_options(c);
 }
