@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 11:39:50 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 15:00:14 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 15:14:23 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static void		check3(t_env *env, char c)
 		env->p_caps = 1;
 	else if (c == '1')
 		env->l = 0;
-	/*else if (c == '-')
-		(void)c;*/
+	else if (c == 'T')
+		env->t_caps = 1;
 	else
 		error_options(c);
 }

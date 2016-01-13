@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:50:58 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 12:14:43 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 15:12:00 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ char			*load_file_date(t_env *env, struct stat *info)
 
 	ftime = file_time(env, info);
 	brut_time = ctime(&ftime);
+	if (env->t_caps)
+		return (ft_strsub(brut_time, 4, ft_strlen(brut_time) - 5));
 	current_time = time(NULL);
 	delta_time = current_time - info->st_mtime;
 	if (delta_time > 60 * 60 * 24 * 30 * 6
