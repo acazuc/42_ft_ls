@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 11:39:50 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 13:42:49 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 15:00:14 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void		check3(t_env *env, char c)
 	else if (c == 'P')
 		env->p_caps = 1;
 	else if (c == '1')
-		(void)c;
+		env->l = 0;
 	/*else if (c == '-')
 		(void)c;*/
 	else
