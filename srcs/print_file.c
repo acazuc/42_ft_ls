@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:16:35 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 12:07:03 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 15:07:21 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void			print_file(t_env *env, t_file *file, t_directory *dir)
 		ft_putstr(file->links);
 		put_user(env, file, dir);
 		put_group(env, file, dir);
+		if (env->o && env->g)
+			putspaces(2);
 		putspaces(1 + dir->size_len - ft_strlen(file->size));
 		ft_putstr(file->size);
 		putspaces(1 + dir->date_len - ft_strlen(file->date));
