@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:50:58 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 09:17:25 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 10:05:22 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*load_file_date(t_env *env, struct stat *info)
 	{
 		if (!(result = ft_strsub(brut_time, 4, 7))
 				|| !(result = ft_strjoin_free1(result, " "))
-			|| !(result = ft_strjoin_free1(result, ft_strsub(brut_time, 20, 4))))
+			|| !(result = ft_strjoin_free1(result, ft_strsub(brut_time, ft_strlen(brut_time) - 6, 5))))
 			error_quit("Failed to malloc time");
 	}
 	else
