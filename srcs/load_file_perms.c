@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:27:53 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 08:45:21 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 08:47:52 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ char		*load_file_perms(struct stat *info)
 		error_quit("Failed to malloc file perms");
 	if (S_ISLNK(info->st_mode))
 		perms[0] = 'l';
-	else if (S_ISDIR(info->st_mode))
+	else if (S_IFDIR & info->st_mode)
 		perms[0] = 'd';
-	else if (S_ISBLK(info->st_mode))
+	else if (S_IFBLK & info->st_mode)
 		perms[0] = 'b';
-	else if (S_ISCHR(info->st_mode))
+	else if (S_IFCHR & info->st_mode)
 		perms[0] = 'c';
 	else if (S_IFIFO & info->st_mode)
 		perms[0] = 'p';
