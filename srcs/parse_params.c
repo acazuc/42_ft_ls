@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 11:39:50 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 12:05:16 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 13:33:10 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void		error_options(char c)
 {
-	ft_putstr("ls: invalid option -- '");
+	ft_putstr("/bin/ls: illegal option -- ");
 	ft_putchar(c);
-	ft_putendl("'");
+	ft_putstr("\nusage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]\n");
 	exit(-1);
 }
 
