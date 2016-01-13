@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 11:48:18 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 12:52:11 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 13:01:26 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 
 int				parse_params(t_env *env, int ac, char **av);
 void			parse_sources(t_env *env, int ac, char **av, int c);
-void			print_directory(t_env *env, char *dir, int is_recur, char *display_path);
+void			print_directory(t_env *env, char *dir, int is_recur
+		, char *display_path);
 void			print_file(t_env *env, t_file *file, t_directory *dir);
 void			error_quit(char *error);
 void			directory_add_file(t_env *env, t_directory *dir, char *name);

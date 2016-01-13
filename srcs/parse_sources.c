@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 12:55:35 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 12:53:37 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 13:01:56 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ static void		print_sources(t_env *env, int recur)
 	}
 }
 
-static void		push_source(t_env *env, char *path, char *display_path, struct stat *info)
+static void		push_source(t_env *env, char *path, char *display_path
+		, struct stat *info)
 {
 	t_source		*new;
 
@@ -53,7 +54,8 @@ static void		push_source(t_env *env, char *path, char *display_path, struct stat
 	parse_source_push(env, new);
 }
 
-static int		add_source(t_env *env, char *path, t_directory *dir, char *display_path)
+static int		add_source(t_env *env, char *path, t_directory *dir
+		, char *display_path)
 {
 	struct stat		info;
 
