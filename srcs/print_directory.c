@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 11:06:21 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 10:58:20 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 11:06:50 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ void			print_subdirs(t_env *env, t_directory *dir)
 	}
 }
 
-static void			print_directory_part(int is_recur, char *path, t_env *env
-		, int total_links, t_directory *dir)
+static void			print_directory_part(int is_recur, char *path, t_env *env)
 {
 	if (is_recur)
 	{
@@ -47,10 +46,14 @@ static void			print_directory_part(int is_recur, char *path, t_env *env
 		ft_putstr(path);
 		ft_putstr(":\n");
 	}
+}
+
+static void			print_directory_part2(t_env *env, t_directory *dir)
+{
 	if (env->l && dir->files != NULL)
 	{
 		ft_putstr("total ");
-		ft_putnbr(total_links);
+		ft_putnbr(dir->total_links);
 		ft_putchar('\n');
 	}
 }
@@ -60,9 +63,10 @@ void			print_directory(t_env *env, char *path, int is_recur)
 	t_directory			*dir;
 	t_file_list			*lst;
 
+	print_directory_part(is_recur, path, env);
 	if ((dir = load_directory(env, path)))
 	{
-		print_directory_part(is_recur, path, env, dir->total_links, dir);
+		print_directory_part2(env, dir);
 		lst = dir->files;
 		while (lst)
 		{
