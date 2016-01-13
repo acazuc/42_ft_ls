@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:50:58 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 10:50:32 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 11:36:19 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*load_file_date(t_env *env, struct stat *info)
 		}
 		else
 		{
-			if (!(result = ft_strjoin_free3(result, ft_strsub(brut_time, 16, 4))))
+			if (!(result = ft_strjoin_free3(result, ft_strsub(brut_time, 20, 4))))
 				error_quit("Failed to malloc time");
 		}
 	}
