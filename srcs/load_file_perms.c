@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:27:53 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 17:04:46 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 17:24:56 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ static char	get_char_0(struct stat *info)
 		return ('s');
 	else if (S_IFDIR & info->st_mode)
 		return ('d');
-	else if (S_IFBLK & info->st_mode)
-		return ('b');
 	else if (S_IFCHR & info->st_mode)
 		return ('c');
+	else if (S_IFBLK & info->st_mode)
+		return ('b');
 	else if (S_IFIFO & info->st_mode)
 		return ('p');
 	else
@@ -84,7 +84,7 @@ static char	get_char_9(struct stat *info)
 	}
 }
 
-char		*load_file_perms(char *path, struct stat *info)
+char		*load_file_perms(struct stat *info)
 {
 	char	*perms;
 

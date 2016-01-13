@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:27:08 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 16:32:40 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 17:32:45 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,11 @@ static void		set_infos_l(t_env *env, t_file *file, struct stat *info)
 		file->group = ft_strdup(gr->gr_name ? gr->gr_name : "");
 	}
 	file->links = ft_itoa(info->st_nlink);
-	file->size = ft_itoa(info->st_size);
+	file->perms = load_file_perms(info);
+	if (file->perms[0] == 'c' || file->perms[0] == 'b')
+		file->size = load_file_driver(info);
+	else
+		file->size = ft_itoa(info->st_size);
 	file->date = load_file_date(env, info);
 }
 
@@ -82,13 +86,11 @@ void		load_file(t_env *env, t_file *file, char *name, t_directory *dir)
 	{
 		if (is_lnk)
 		{
-			file->perms = load_file_perms(loul, &linfo);
 			dir->total_links += load_file_symb(env, file, &linfo, loul);
 			free(loul);
 			return ;
 		}
 	}
-	file->perms = load_file_perms(loul, &info);
 	if (env->l)
 	{
 		set_infos_l(env, file, &info);
