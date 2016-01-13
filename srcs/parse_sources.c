@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 12:55:35 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 09:53:07 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 10:52:30 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,5 @@ void			parse_sources(t_env *env, int ac, char **av, int c)
 	if (!printed)
 		print_directory(env, ".", 0);
 	else
-		print_sources(env, printed_file || ac - c > 2);
+		print_sources(env, printed_file || ac - c >= 2);
 }

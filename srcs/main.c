@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/31 08:23:04 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/12 19:40:45 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 10:53:07 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int		main(int ac, char **av)
 	env.t = 0;
 	env.u = 0;
 	env.u_caps = 0;
+	env.printed_file = 0;
 	env.files = NULL;
 	env.sources = NULL;
 	mdr = parse_params(&env, ac, av);

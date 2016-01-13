@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 11:06:21 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 10:02:46 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 10:53:58 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static void			print_directory_part(int is_recur, char *path, t_env *env
 {
 	if (is_recur)
 	{
-		ft_putchar('\n');
+		if (env->printed_file)
+			ft_putchar('\n');
 		ft_putstr(path);
 		ft_putstr(":\n");
 	}
