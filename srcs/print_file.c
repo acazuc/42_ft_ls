@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:16:35 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 16:07:32 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 16:29:31 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,10 @@ void			print_file(t_env *env, t_file *file, t_directory *dir)
 	}
 	else if (env->p && file->is_dir)
 		ft_putchar('/');
+	if (file->lnk_name)
+	{
+		ft_putstr(" -> ");
+		ft_putstr(file->lnk_name);
+	}
 	ft_putchar('\n');
 }

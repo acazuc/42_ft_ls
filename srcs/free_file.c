@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/06 09:38:27 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/12 14:36:51 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 16:27:36 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	free_file(t_env *env, struct s_file *file)
 			free(file->size);
 			free(file->date);
 		}
+		free(file->lnk_name);
 		free(file->name);
 		free(file);
 	}

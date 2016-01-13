@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/31 08:30:19 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 15:42:17 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 16:27:18 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 struct					s_file
 {
 	char				*name;
+	char				*lnk_name;
 	char				*perms;
 	char				*links;
 	char				*user;

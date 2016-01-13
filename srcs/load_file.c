@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:27:08 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 16:06:46 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/13 16:28:52 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static void		set_infos_l(t_env *env, t_file *file, struct stat *info)
 		file->user = ft_strdup(pw->pw_name ? pw->pw_name : "");
 		file->group = ft_strdup(gr->gr_name ? gr->gr_name : "");
 	}
-	file->perms = load_file_perms(info);
 	file->links = ft_itoa(info->st_nlink);
 	file->size = ft_itoa(info->st_size);
 	file->date = load_file_date(env, info);
@@ -57,8 +56,7 @@ static int		load_file_symb(t_env *env, t_file *file, struct stat *info
 	file->is_dir = S_ISDIR(info->st_mode);
 	if (env->l)
 	{
-		file->name = ft_strjoin_free1(file->name, " -> ");
-		file->name = ft_strjoin_free3(file->name, linkname);
+		file->lnk_name = linkname;
 		set_infos_l(env, file, info);
 	}
 	set_other_infos(env, file, info);
@@ -73,6 +71,7 @@ void		load_file(t_env *env, t_file *file, char *name, t_directory *dir)
 	int				is_lnk;
 
 	file->name = ft_strdup(name);
+	file->lnk_name = NULL;
 	loul = ft_strjoin_free1(ft_strjoin(dir->path, "/"), name);
 	stat(loul, &info);
 	file->is_dir = S_ISDIR(info.st_mode);
@@ -83,11 +82,13 @@ void		load_file(t_env *env, t_file *file, char *name, t_directory *dir)
 	{
 		if (is_lnk)
 		{
+			file->perms = load_file_perms(loul, &linfo);
 			dir->total_links += load_file_symb(env, file, &linfo, loul);
 			free(loul);
 			return ;
 		}
 	}
+	file->perms = load_file_perms(loul, &info);
 	if (env->l)
 	{
 		set_infos_l(env, file, &info);
