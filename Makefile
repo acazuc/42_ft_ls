@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/01/18 12:09:19 by acazuc           ###   ########.fr        #
+#    Updated: 2016/01/18 12:29:15 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS_NAME = main.c \
 			directory_add_file.c \
 			error_quit.c \
 			load_file.c \
+			load_file_loul.c \
 			load_file_perms.c \
 			load_file_driver.c \
 			load_file_date.c \

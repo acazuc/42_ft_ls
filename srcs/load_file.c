@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 16:27:08 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 17:53:56 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/18 12:28:40 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,25 +76,22 @@ void		load_file(t_env *env, t_file *file, char *name, t_directory *dir)
 
 	file->name = ft_strdup(name);
 	file->lnk_name = NULL;
-	loul = name[0] == '/' ? ft_strdup(name) : ft_strjoin_free1(ft_strjoin(dir->path, "/"), name);
+	loul = load_file_loul(name, dir);
 	stat(loul, &info);
 	is_lnk = lstat(loul, &linfo) == 0 && info.st_ino != linfo.st_ino;
 	file->is_dir = S_ISDIR(info.st_mode) && (!env->l || S_ISDIR(linfo.st_mode));
 	load_file_type(file, &info, is_lnk);
 	set_other_infos(env, file, &info);
 	if (!env->p_caps)
-	{
 		if (is_lnk)
 		{
 			dir->total_links += load_file_symb(env, file, &linfo, loul);
 			free(loul);
 			return ;
 		}
-	}
 	if (env->l)
-	{
 		set_infos_l(env, file, &info);
+	if (env->l)
 		dir->total_links += info.st_blocks;
-	}
 	free(loul);
 }

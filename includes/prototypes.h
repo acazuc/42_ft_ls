@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 11:48:18 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/18 12:09:06 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/18 12:28:58 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ void			load_file_type(t_file *file, struct stat *info, int is_lnk);
 time_t			file_time(t_env *env, struct stat *info);
 void			parse_source_push(t_env *env, t_source *source);
 void			parse_sources_empty(char **av, int c);
+char			*load_file_loul(char *name, t_directory *dir);
 
 #endif
