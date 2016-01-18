@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/01/13 17:08:54 by acazuc           ###   ########.fr        #
+#    Updated: 2016/01/18 11:59:23 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS_PATH = srcs/
 SRCS_NAME = main.c \
 			print_directory.c \
 			parse_params.c \
+			parse_params2.c \
 			parse_sources.c \
 			load_directory.c \
 			directory_add_file.c \

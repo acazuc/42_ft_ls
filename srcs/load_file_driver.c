@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 17:08:36 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 17:42:32 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/18 11:46:14 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*load_file_driver(struct stat *info)
 	major_nb = major(info->st_rdev);
 	minor_nb = minor(info->st_rdev);
 	if (!(result = ft_strdup("")))
-			error_quit("Failed to malloc major number");
+		error_quit("Failed to malloc major number");
 	if (major_nb < 100)
 		if (!(result = ft_strjoin_free1(result, " ")))
 			error_quit("Failed to malloc major number");

@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 11:39:50 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 16:34:45 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/18 11:59:31 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,52 +22,7 @@ static void		error_options(char c)
 
 static void		check3(t_env *env, char c)
 {
-	if (c == 'A')
-		env->a_caps = 1;
-	else if (c == 'f')
-	{
-		env->a = 1;
-		env->f = 1;
-	}
-	else if (c == 'p')
-	{
-		env->p = 1;
-		env->f_caps = 0;
-	}
-	else if (c == 'P')
-		env->p_caps = 1;
-	else if (c == '1')
-		env->l = 0;
-	else if (c == 'T')
-		env->t_caps = 1;
-	else if (c == 'c')
-	{
-		env->u = 0;
-		env->u_caps = 0;
-		env->c = 1;
-	}
-	else if (c == 'F')
-	{
-		env->p = 0;
-		env->f_caps = 1;
-	}
-	else
-		error_options(c);
-}
-
-static void		check2(t_env *env, char c)
-{
-	if (c == 'o')
-	{
-		env->l = 1;
-		env->o = 1;
-	}
-	else if (c == 'f')
-	{
-		env->a = 1;
-		env->f = 1;
-	}
-	else if (c == 'S')
+	if (c == 'S')
 	{
 		env->t = 0;
 		env->s_caps = 1;
@@ -78,6 +33,33 @@ static void		check2(t_env *env, char c)
 	{
 		env->l = 1;
 		env->n = 1;
+	}
+	else
+		check4(env, c);
+}
+
+static void		check2(t_env *env, char c)
+{
+	if (c == 'U')
+	{
+		env->u = 0;
+		env->c = 0;
+		env->u_caps = 1;
+	}
+	else if (c == 'g')
+	{
+		env->l = 1;
+		env->g = 1;
+	}
+	else if (c == 'o')
+	{
+		env->l = 1;
+		env->o = 1;
+	}
+	else if (c == 'f')
+	{
+		env->a = 1;
+		env->f = 1;
 	}
 	else
 		check3(env, c);
@@ -102,17 +84,6 @@ static void		check1(t_env *env, char c)
 		env->u_caps = 0;
 		env->c = 0;
 		env->u = 1;
-	}
-	else if (c == 'U')
-	{
-		env->u = 0;
-		env->c = 0;
-		env->u_caps = 1;
-	}
-	else if (c == 'g')
-	{
-		env->l = 1;
-		env->g = 1;
 	}
 	else
 		check2(env, c);

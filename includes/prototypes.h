@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 11:48:18 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 17:24:25 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/18 12:00:08 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "env.h"
 
 int				parse_params(t_env *env, int ac, char **av);
+void			check4(t_env *env, char c);
 void			parse_sources(t_env *env, int ac, char **av, int c);
 void			print_directory(t_env *env, char *dir, int is_recur
 		, char *display_path);
