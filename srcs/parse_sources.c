@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 12:55:35 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/13 17:52:56 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/18 12:08:49 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,7 @@ void			parse_sources(t_env *env, int ac, char **av, int c)
 	directory_init(&dir, ".");
 	printed = 0;
 	printed_file = 0;
-	i = c;
-	while (av[i])
-		if (!av[i++][0])
-		{
-			ft_putendl_fd("ls: fts_open: No such file or directory", 2);
-			exit(-1);
-		}
+	parse_sources_empty(av, c);
 	i = c;
 	while (av[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/18 11:56:15 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/18 12:00:40 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/18 12:02:16 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ static void		error_options(char c)
 {
 	ft_putstr_fd("/bin/ls: illegal option -- ", 2);
 	ft_putchar_fd(c, 2);
-	ft_putstr_fd("\nusage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]\n", 2);
+	ft_putstr_fd("\nusage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] ", 2);
+	ft_putstr_fd("[file ...]\n", 2);
 	exit(-1);
 }
 
@@ -60,4 +61,3 @@ void			check4(t_env *env, char c)
 	else
 		check5(env, c);
 }
-
