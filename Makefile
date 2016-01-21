@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/01/19 09:28:27 by acazuc           ###   ########.fr        #
+#    Updated: 2016/01/21 16:57:36 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ OBJS = $(addprefix $(OBJS_PATH), $(OBJS_NAME))
 
 LIBRARY = -L libft/ -lft
 
-all: $(NAME)
+all: odir $(NAME)
 
 $(NAME): $(OBJS)
 	@make -C libft/
@@ -114,7 +114,8 @@ $(OBJS_PATH)%.o: $(SRCS_PATH)%.c
 	@echo " - Compiling $<"
 	@$(CC) $(CFLAGS) -o $@ -c $< -I$(INCLUDES_PATH)
 
-.PHONY: clean fclean re
+odir:
+	@mkdir -p $(OBJS_PATH)
 
 clean:
 	@make -C libft/ clean
@@ -127,3 +128,5 @@ fclean: clean
 	@rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: clean fclean re odir
