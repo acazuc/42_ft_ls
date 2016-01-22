@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/01/21 16:57:36 by acazuc           ###   ########.fr        #
+#    Updated: 2016/01/22 14:45:18 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS_NAME = main.c \
 			directory_add_file.c \
 			error_quit.c \
 			load_file.c \
+			load_file_symb.c \
 			load_file_loul.c \
 			load_file_perms.c \
 			load_file_driver.c \
@@ -39,7 +40,8 @@ SRCS_NAME = main.c \
 			add_file.c \
 			file_time.c \
 			parse_source_push.c \
-			parse_sources_empty.c
+			parse_sources_empty.c \
+			load_file_setinfos.c
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 

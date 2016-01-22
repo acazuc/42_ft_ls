@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/01 11:48:18 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/18 12:28:58 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/01/22 14:44:58 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ t_directory		*load_directory(t_env *env, char *path);
 void			add_file(t_env *env, t_directory *dir, t_file_list *list);
 void			free_file(t_env *env, struct s_file *file);
 char			*load_file_driver(struct stat *info);
+int				load_file_symb(t_env *env, t_file *file, struct stat *info
+		, char *rpath);
 void			load_file(t_env *env, t_file *file, char *name
 		, t_directory *dir);
 char			*load_file_perms(struct stat *info);
@@ -40,5 +42,6 @@ time_t			file_time(t_env *env, struct stat *info);
 void			parse_source_push(t_env *env, t_source *source);
 void			parse_sources_empty(char **av, int c);
 char			*load_file_loul(char *name, t_directory *dir);
+void			load_file_setinfos(t_env *env, t_file *file, struct stat *info);
 
 #endif
