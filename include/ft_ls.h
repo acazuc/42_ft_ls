@@ -6,14 +6,14 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/31 08:28:42 by acazuc            #+#    #+#             */
-/*   Updated: 2016/01/12 15:55:46 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/27 11:42:28 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LS_H
 # define FT_LS_H
 
-# include "../libft/includes/libft.h"
+# include "../libft/include/libft.h"
 # include "includes.h"
 # include "file_list.h"
 # include "directory.h"
